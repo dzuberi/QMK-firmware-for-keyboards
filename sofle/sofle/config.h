@@ -14,11 +14,12 @@
 #define DEBOUNCE 5
 
 /* encoder support */
-#define ENCODERS_PAD_A { GP28 }
-#define ENCODERS_PAD_B { GP29 }
-#define ENCODERS_PAD_A_RIGHT { GP29 }
-#define ENCODERS_PAD_B_RIGHT { GP28 }
+#define ENCODERS_A_PINS { GP28 }
+#define ENCODERS_B_PINS { GP29 }
+#define ENCODERS_A_PINS_RIGHT { GP29 }
+#define ENCODERS_B_PINS_RIGHT { GP28 }
 #define ENCODER_RESOLUTION 4
+#define NUM_ENCODERS 2
 
 #define TAP_CODE_DELAY 10
 
