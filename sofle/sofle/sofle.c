@@ -45,8 +45,8 @@ const uint8_t PROGMEM encoder_hand_swap_config[NUM_ENCODERS] = {1, 0};
 
 #endif
 
-
-#ifdef RGB_MATRIX_ENABLE
+#if 0
+// #ifdef RGB_MATRIX_ENABLE
   // Physical Layout
   // Columns
   // 0  1  2  3  4  5  6  7  8  9  10 11 12 13
@@ -62,7 +62,7 @@ const uint8_t PROGMEM encoder_hand_swap_config[NUM_ENCODERS] = {1, 0};
   //     08 17 18 27 28     28 27 18 17 08      4
   //    07    06    05       05    06    07
 
-led_config_t g_led_config = {
+extern led_config_t g_led_config = {
     {
         {  11,  12,  21,  22,  31,  32 },
         {  10,  13,  20,  23,  30,  33 },
