@@ -1,3 +1,5 @@
+#ifdef OLED_ENABLE
+
 oled_rotation_t oled_init_user(oled_rotation_t rotation) { return OLED_ROTATION_270; }
 
 void render_space(void) {
@@ -331,3 +333,4 @@ bool oled_task_user(void) {
     return false;
 }
 
+#endif
