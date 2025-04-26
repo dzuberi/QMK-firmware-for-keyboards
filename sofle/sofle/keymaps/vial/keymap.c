@@ -21,6 +21,48 @@
 #include QMK_KEYBOARD_H
 #include "oled.c"
 
+#ifdef RGB_MATRIX_ENABLE
+// Define the maximum number of layers
+#define SOFLE_MAX_LAYERS 8
+
+// Define brightness multiplier (0.0 to 1.0)
+#define BRIGHTNESS_MULTIPLIER 0.2
+
+// Helper macro to scale RGB values by brightness
+#define SCALE_RGB(color) (uint8_t)((color) * BRIGHTNESS_MULTIPLIER)
+
+// Function to update LEDs based on the active layer
+bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
+    uint8_t layer = get_highest_layer(layer_state);
+
+    // Ensure the layer is within the valid range
+    if (layer < SOFLE_MAX_LAYERS) {
+        // Define HSV colors for each layer
+        hsv_t hsv_color;
+        switch (layer) {
+            case 0: hsv_color = (hsv_t){255, 67, 111}; break; // Default color #FF436F
+            case 1: hsv_color = (hsv_t){HSV_GREEN}; break;
+            case 2: hsv_color = (hsv_t){HSV_BLUE}; break;
+            case 3: hsv_color = (hsv_t){HSV_YELLOW}; break;
+            case 4: hsv_color = (hsv_t){HSV_CYAN}; break;
+            case 5: hsv_color = (hsv_t){HSV_MAGENTA}; break;
+            case 6: hsv_color = (hsv_t){HSV_WHITE}; break;
+            case 7: hsv_color = (hsv_t){HSV_RED}; break; // Custom HSV for orange
+        }
+        hsv_color.v = rgb_matrix_get_val()/2; // Get the current brightness value
+
+        // Convert HSV to RGB
+        rgb_t rgb_color = hsv_to_rgb(hsv_color);
+
+        // Set LED 0 and 35 to the calculated color
+        rgb_matrix_set_color(0, rgb_color.r, rgb_color.g, rgb_color.b);
+        rgb_matrix_set_color(35, rgb_color.r, rgb_color.g, rgb_color.b);
+    }
+
+    return true;
+}
+#endif
+
 // Default keymap. This can be changed in Vial. Use oled.c to change beavior that Vial cannot change.
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
